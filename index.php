@@ -1,3 +1,53 @@
+<?php
+session_start();
+
+if($_SESSION['loggedin'] == true){
+  header("location: dashboard.php");
+
+}
+// Include config file
+require_once "config.php";
+
+$showAlert = false;
+$showError = false;
+$exists=false;
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    $name = $_POST["name"];
+    $password = md5($_POST["password"]);
+    $email = $_POST["email"];
+    $phone = $_POST["phone"];
+    $gender = $_POST["gender"];
+    $age = $_POST["age"];
+    $pid;
+
+    $q = "SELECT * FROM `lastpid` WHERE `lastpid` = '1'";
+    $r = mysqli_query($conn, $q);
+    if (mysqli_num_rows($r) > 0) {
+      // output data of each row
+      while($row = mysqli_fetch_assoc($r)) {
+        $pid =  $row["pid"] + 1;
+        echo $pid;
+      }
+    }
+    $q2 = "UPDATE `lastpid` SET `pid`= '$pid' WHERE `lastpid` = '1'";
+    $r2 = mysqli_query($conn, $q2);
+    if ($r2) {
+      echo "Record updated successfully";
+    } else {
+      echo "Error updating record: " . mysqli_error($conn);
+    }
+
+        $sql = "INSERT INTO `pinfo` (`name`, `Password`, `email`, `phone`, `gender`, `age`, `pid`) VALUES ('$name', '$password','$email', '$phone', '$gender', '$age', '$pid')";
+        $result = mysqli_query($conn, $sql);
+        if ($result){
+            $showAlert = true;
+            header("location: dashboard.php");
+
+        }
+
+
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +55,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Medilab Bootstrap Template - Index</title>
+  <title>MY HEALTH CARD</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -72,7 +122,7 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo mr-auto"><a href="index.html">Medilab</a></h1>
+      <h1 class="logo mr-auto"><a href="index.html">MY HEALTH CARD</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -966,19 +1016,18 @@
 
             </div>
 
-            <form action="forms/appointment.php" method="post" role="form" class="php-email-form">
+            <form action="" method="post" role="form" class="php-email-form">
               <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" data-rule="minlen:4"
+                <input type="text" class="form-control" name="name" id="name" data-rule="minlen:4"
                   data-msg="Please enter at least 4 chars" placeholder="Rahul Sharma">
                 <div class="validate"></div>
               </div>
 
               <div class="form-group">
-                <label for="Birth">Birth Date</label>
-                <input type="datetime" name="date" class="form-control datepicker" id="date"
-                  placeholder=" Enter Your Birth Date" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-                <div class="validate"></div>
+                <label for="Birth">Age</label>
+                <input type="number" name="age" class="form-control " id="age"
+                  placeholder=" 35" >
               </div>
               <div class="form-group">
                 <label for="Gender">Gender</label>
@@ -999,7 +1048,7 @@
               </div>
               <div class="form-group">
                 <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" data-rule="email"
+                <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" data-rule="email"
                   data-msg="Please enter a valid email" placeholder="hello@email.com">
                 <div class="validate"></div>
                 <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
@@ -1007,7 +1056,7 @@
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
+                <input name="password" type="password" class="form-control" id="exampleInputPassword1">
               </div>
 
 
@@ -1046,11 +1095,11 @@
 
             </div>
 
-            <form action="forms/appointment.php" method="post" role="form" class="php-email-form">
+            <form action="login.php" method="post" role="form" class="php-email-form">
 
               <div class="form-group">
                 <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" data-rule="email"
+                <input type="email" name="email" class="form-control" id="emaillogin" aria-describedby="emailHelp" data-rule="email"
                   data-msg="Please enter a valid email" placeholder="hello@email.com">
                 <div class="validate"></div>
                 <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
@@ -1058,10 +1107,10 @@
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
+                <input type="password" name="password" class="form-control" id="exampleInputPassword1">
               </div>
 
-              <button type="submit" class="btn btn-primary">Lon In</button>
+              <button type="submit" class="btn btn-primary">Log In</button>
             </form>
             <div class="section-title">
               <p>New User created account</p>

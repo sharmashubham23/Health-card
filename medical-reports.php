@@ -1,19 +1,18 @@
 <?php
 session_start();
-if(!isset($_SESSION['loggedinadmin']) || $_SESSION['loggedinadmin']!=true ){
-    header("location: /freelanceweb/admin/adminlogin.php");
+// if(isset($_SESSION['loggedin']) || $_SESSION['loggedin'] ==true ){
+//     header("location: index.php");
+//     exit;
+// }
+
+if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true ){
+    header("location: index.php");
     exit;
 }
-$server = "localhost";
-$username = "root";
-$password = "";
-$database = "webfreelance";
-
-$conn = mysqli_connect($server, $username, $password, $database);
-if (!$conn){
-
-    die("Error". mysqli_connect_error());
-}
+// if($_SESSION['access'] !=true){
+//     header("location: profile.php");
+//     exit;
+// }
 
 
 
@@ -54,7 +53,7 @@ if (!$conn){
 ">
         <div class="container d-flex align-items-center">
 
-            <h1 class="logo mr-auto"><a href="index.html">Medilab</a></h1>
+            <h1 class="logo mr-auto"><a href="index.html">MY HEALTH CARD</a></h1>
             <!-- Uncomment below if you prefer to use an image logo -->
             <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -83,14 +82,14 @@ if (!$conn){
                         </ul>
                     </li>
                     <li>
-                        <a data-toggle="modal" data-target="#popUpWindowlogin" style="cursor: pointer;">Log In</a>
+                        <a href="logout.php">Log Out</a>
                     </li>
 
                 </ul>
             </nav><!-- .nav-menu -->
 
-            <button type='button' class="appointment-btn scrollto" data-toggle="modal" data-target="#popUpWindow"
-                style="border: none;">Register</button>
+            <!-- <button type='button' class="appointment-btn scrollto" data-toggle="modal" data-target="#popUpWindow"
+                style="border: none;">Register</button> -->
 
         </div>
     </header><!-- End Header -->
@@ -258,11 +257,11 @@ if (!$conn){
 
                         </div>
 
-                        <form action="forms/appointment.php" method="post" role="form" class="php-email-form">
+                        <form action="fileupload.php" method="post" role="form" class="php-email-form" enctype="multipart/form-data">
 
                             <div class="form-group">
                                 <label for="reportname">Report Name</label>
-                                <input type="text" class="form-control" id="text" aria-describedby="emailHelp"
+                                <input type="text" name = "rname" class="form-control" id="text" aria-describedby="emailHelp"
                                     data-rule="email" data-msg="Please enter a valid email"
                                     placeholder="Pathology Report">
                                 <small id="emailHelp" class="form-text text-muted">Enter Report name such as Consulation
@@ -270,20 +269,20 @@ if (!$conn){
                             </div>
                             <div class="form-group">
                                 <label for="reportname">Lab Name</label>
-                                <input type="text" class="form-control" id="text" aria-describedby="emailHelp"
+                                <input type="text" name="lname" class="form-control" id="text" aria-describedby="emailHelp"
                                     data-rule="email" data-msg="Please enter a valid email" placeholder="sms lab">
 
                             </div>
                             <div class="form-group">
                                 <label for="exampleFormControlTextarea1">Additional Note</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                <textarea type="text" class="form-control" name="addnote" id="exampleFormControlTextarea1" rows="3"></textarea>
                             </div>
                             <div class="form-group">
-                                <label for="exampleFormControlFile1">Addd Report PDF</label>
-                                <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                                <label for="exampleFormControlFile1">Add Report PDF</label>
+                                <input type="file" name="file" class="form-control-file" id="exampleFormControlFile1">
                             </div>
                             <center>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" name="submit" value="upload" class="btn btn-primary">Submit</button>
                             </center>
                         </form>
                         <!-- <div class="section-title">
