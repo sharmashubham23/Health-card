@@ -1,20 +1,22 @@
 <?php
 session_start();
-// if(isset($_SESSION['loggedin']) || $_SESSION['loggedin'] ==true ){
-//     header("location: index.php");
-//     exit;
-// }
-
+include_once 'config.php';
+$pid = $_SESSION["pid"];
+$id = $_SESSION["id"];
 if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true ){
     header("location: index.php");
     exit;
 }
-// if($_SESSION['access'] !=true){
-//     header("location: profile.php");
-//     exit;
-// }
-
-
+$q = "SELECT * FROM `pinfo` WHERE `id` = '$id'";
+$r = mysqli_query($conn, $q);
+if (mysqli_num_rows($r) > 0) {
+   // output data of each row
+   while($row = mysqli_fetch_assoc($r)) {
+     $pid =  $row["pid"];
+   }
+ }
+$sql = "SELECT * FROM `mreports` WHERE pid='$pid'";
+$result = mysqli_query($conn, $sql);
 
 
 
@@ -59,28 +61,8 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true ){
 
             <nav class="nav-menu d-none d-lg-block">
                 <ul>
-                    <li class="active"><a href="index.html">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#departments">Departments</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <li class="drop-down"><a href="">Drop Down</a>
-                        <ul>
-                            <li><a href="#">Drop Down 1</a></li>
-                            <li class="drop-down"><a href="#">Deep Drop Down</a>
-                                <ul>
-                                    <li><a href="#">Deep Drop Down 1</a></li>
-                                    <li><a href="#">Deep Drop Down 2</a></li>
-                                    <li><a href="#">Deep Drop Down 3</a></li>
-                                    <li><a href="#">Deep Drop Down 4</a></li>
-                                    <li><a href="#">Deep Drop Down 5</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Drop Down 2</a></li>
-                            <li><a href="#">Drop Down 3</a></li>
-                            <li><a href="#">Drop Down 4</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="index.php">Home</a></li>
+                    
                     <li>
                         <a href="logout.php">Log Out</a>
                     </li>
@@ -159,81 +141,63 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true ){
 
             <div class="section-title">
                 <h2>Medical Reports</h2>
-                <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint
-                    consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia
-                    fugiat sit
-                    in iste officiis commodi quidem hic quas.</p>
+                
             </div>
 
             <div class="row">
+            <?php
+                
+while($row = mysqli_fetch_assoc($result)) {
+    // Store a string into the variable which 
 
-                <div class="col-lg-6">
+
+// Store the cipher method 
+$ciphering = "AES-128-CTR"; 
+
+// Use OpenSSl Encryption method 
+$iv_length = openssl_cipher_iv_length($ciphering); 
+$options = 0; 
+
+// Non-NULL Initialization Vector for encryption 
+$encryption_iv = '1234567891011121'; 
+
+// Store the encryption key 
+$encryption_key = "sjdknskdjfnkjsfklskpdfk"; 
+
+$base = "upload/";
+$original_string = $base.$row["reportpdf"];
+// Use openssl_encrypt() function to encrypt the data 
+$encryption = openssl_encrypt($original_string, $ciphering, 
+			$encryption_key, $options, $encryption_iv); 
+
+ 
+
+
+
+
+      $surl = $encryption;
+      
+                echo'<div class="col-lg-6 mt-4">
                     <div class="member d-flex align-items-start" style="box-shadow: 0px 2px 15px rgb(0 0 0 / 8%);">
                         <!-- <div class="pic"><img src="assets/img/doctors/doctors-1.jpg" class="img-fluid" alt=""></div> -->
                         <div class="member-info">
-                            <h4>Walter White</h4>
-                            <span>Chief Medical Officer</span>
-                            <p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p>
-                            <div class="social">
-                                <a href=""><i class="ri-twitter-fill"></i></a>
-                                <a href=""><i class="ri-facebook-fill"></i></a>
-                                <a href=""><i class="ri-instagram-fill"></i></a>
-                                <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                        <a href="http://localhost/HealthCard/fileview.php?u='.$surl.'" target="_blank"><h4>'.$row["reportname"].'</h4></a>
+                            <span>'.$row["labname"].'</span>
+                            <p>'.$row["addnote"].'</p>    
+                            <small>'.$row["dateofupload"].'</small>
 
-                <div class="col-lg-6 mt-4 mt-lg-0">
-                    <div class="member d-flex align-items-start">
-                        <!-- <div class="pic"><img src="assets/img/doctors/doctors-2.jpg" class="img-fluid" alt=""></div> -->
-                        <div class="member-info">
-                            <h4>Sarah Jhonson</h4>
-                            <span>Anesthesiologist</span>
-                            <p>Aut maiores voluptates amet et quis praesentium qui senda para</p>
-                            <div class="social">
-                                <a href=""><i class="ri-twitter-fill"></i></a>
-                                <a href=""><i class="ri-facebook-fill"></i></a>
-                                <a href=""><i class="ri-instagram-fill"></i></a>
-                                <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col-lg-6 mt-4">
-                    <div class="member d-flex align-items-start">
-                        <!-- <div class="pic"><img src="assets/img/doctors/doctors-3.jpg" class="img-fluid" alt=""></div> -->
-                        <div class="member-info">
-                            <h4>William Anderson</h4>
-                            <span>Cardiology</span>
-                            <p>Quisquam facilis cum velit laborum corrupti fuga rerum quia</p>
-                            <div class="social">
-                                <a href=""><i class="ri-twitter-fill"></i></a>
-                                <a href=""><i class="ri-facebook-fill"></i></a>
-                                <a href=""><i class="ri-instagram-fill"></i></a>
-                                <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+                            <div class="button mt-4">
+                                <a target="_blank" href="http://localhost/HealthCard/fileview.php?u='.$surl.'"><button type="button" class="btn btn-outline-primary">View</button></a>
+                                
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>';
+}
+?>
 
-                <div class="col-lg-6 mt-4">
-                    <div class="member d-flex align-items-start">
-                        <!-- <div class="pic"><img src="assets/img/doctors/doctors-4.jpg" class="img-fluid" alt=""></div> -->
-                        <div class="member-info">
-                            <h4>Amanda Jepson</h4>
-                            <span>Neurosurgeon</span>
-                            <p>Dolorum tempora officiis odit laborum officiis et et accusamus</p>
-                            <div class="social">
-                                <a href=""><i class="ri-twitter-fill"></i></a>
-                                <a href=""><i class="ri-facebook-fill"></i></a>
-                                <a href=""><i class="ri-instagram-fill"></i></a>
-                                <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
 
             </div>
 
@@ -241,7 +205,7 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true ){
     </section><!-- End Doctors Section -->
     <!-- Add New Report -->
     <div class="container">
-        <button type='button' class="btn btn-primary" data-toggle="modal" data-target="#addreport">New Add
+        <button type='button' class="btn btn-primary mb-4" data-toggle="modal" data-target="#addreport">Add
             Report</button>
     </div>
 
@@ -257,9 +221,9 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true ){
 
                         </div>
 
-                        <form action="fileupload.php" method="post" role="form" class="php-email-form" enctype="multipart/form-data">
+                        <form action="fileupload.php" method="post" enctype="multipart/form-data">
 
-                            <div class="form-group">
+                             <div class="form-group">
                                 <label for="reportname">Report Name</label>
                                 <input type="text" name = "rname" class="form-control" id="text" aria-describedby="emailHelp"
                                     data-rule="email" data-msg="Please enter a valid email"
@@ -267,10 +231,27 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true ){
                                 <small id="emailHelp" class="form-text text-muted">Enter Report name such as Consulation
                                     Report, Discharge Report, Pathology Report, etc.</small>
                             </div>
+                            <!-- <div class="form-group">
+                <label for="Category">Category</label>
+                <select name="Category" id="Category" class="form-control">
+                  <option value="">Select Category</option>
+                  <option value="Consultation Report">Consultation Report</option>
+                  <option value="Radiology Report">Radiology Report</option>
+                  <option value="Laboratory Report">Laboratory Report</option>
+                  <option value="Prefer">Prefer not to say</option>
+                </select>
+                <div class="validate"></div>
+              </div> -->
                             <div class="form-group">
                                 <label for="reportname">Lab Name</label>
                                 <input type="text" name="lname" class="form-control" id="text" aria-describedby="emailHelp"
-                                    data-rule="email" data-msg="Please enter a valid email" placeholder="sms lab">
+                                    data-rule="email" data-msg="Please enter a valid email" placeholder="SMS lab">
+
+                            </div>
+                            <div class="form-group">
+                                <label for="reportname">Doctor Name</label>
+                                <input type="text" name="dname" class="form-control" id="text" aria-describedby="emailHelp"
+                                    data-rule="email" data-msg="Please enter a valid email" placeholder="Dr. Ankur">
 
                             </div>
                             <div class="form-group">
@@ -279,11 +260,13 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true ){
                             </div>
                             <div class="form-group">
                                 <label for="exampleFormControlFile1">Add Report PDF</label>
-                                <input type="file" name="file" class="form-control-file" id="exampleFormControlFile1">
+                                <input type="file" name="file" class="form-control-file" id="file">
                             </div>
                             <center>
-                                <button type="submit" name="submit" value="upload" class="btn btn-primary">Submit</button>
-                            </center>
+                            <!-- <button type="submit" name="submit" class="btn btn-primary">Submit</button> -->
+                                 <button type="submit" name="upload" value="upload" class="btn btn-primary">Submit</button> 
+                            </center> 
+                          
                         </form>
                         <!-- <div class="section-title">
                             <p>New User created account</p>

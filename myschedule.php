@@ -1,3 +1,18 @@
+<?php
+session_start();
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "shopsky_career";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -150,8 +165,43 @@
                     fugiat sit
                     in iste officiis commodi quidem hic quas.</p>
             </div>
+            <?php
+echo "<div class='container emp-profile'>
+<table class='table table-bordered'>
+  <thead>
+    <tr>
+      <th scope='col'>ID</th>
+      <th scope='col'>User NAME</th>
+
+      <th scope='col'>Job applied</th>
+      <th scope='col'>View</th>
+      <th scope='col'>Delete</th>
+    </tr>
+  </thead>
+  <tbody>";
+  $sql = 'SELECT * FROM `user_list`';
+$retval = mysqli_query($conn, $sql);
+
+if(! $retval ) {
+   die('Could not get data: ' . mysql_error());
+}
+
+
+  while($row = mysqli_fetch_assoc($retval)) {
+  echo"<tr>";
+    echo"<td>" .$row['id']. "</td>";
+      echo"<td>" .$row['name']. "</td>"; 
+      
+
+      echo"<td>".$row['job_applied']."</td>";
+      echo"<td><a href='candidates-data-view.php?cid=".$row['id']."' id='".$row['id']. "' class ='btn btn-success'>View</a></td>";
+      echo"<td><a href='deleteform.php?cid=".$row['id']."' id='".$row['id']. "' class ='btn btn-danger'>Delete</a></td>";
+  echo "</tr>"; 
+}
+?>
         </div>
     </section>
+
     <!--======================== End My Schedule ============= -->
 </body>
 

@@ -10,7 +10,7 @@
     <link
         href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
         rel="stylesheet">
-
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <!-- Vendor CSS Files -->
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet">
@@ -138,8 +138,104 @@
             </g>
         </svg>
     </header>
+<!-- =================Test Cards =========================-->
+<div class="container"> 
+        <div class="row"> 
+            <div class="col-lg-6 mb-4"> 
+                <div class="card"> 
+                    <img class="card-img-top" src="" alt=""> 
+  
+                    <div class="card-body"> 
+                        <h5 class="card-title">Resting Heart Rate – To Assess Aerobic Fitness</h5> 
+                        <p class="card-text"> 
+                        Counting the number of beats of your resting heart rate (RHR) is a useful way of indicating your fitness progress. It should reduce as your aerobic fitness improves.
+
+Your resting heart rate (RHR) represents the number of times your heart beats each minute when you are at rest. Since a strong cardiovascular system allows your heart to pump more blood with every beat, a lower RHR tends to correspond with higher aerobic fitness. Some athletes have recorded a RHR of 40.
+
+How to do this exercise
+
+To measure your RHR, place two fingers either on your neck, just below your jawline (carotid artery), or on your wrist (radial artery), and then count the number of beats you feel in 60 seconds. You should count the first beat as ‘zero’. It is often thought that the best time to take our RHR is first thing in the morning.
+
+Results of this exercise test:
+
+60 or less = Good
+61 to 80 = Average
+81 to 100 = High, but still considered acceptable
+101 or more = Abnormally high (not good!)
+Your resting heart rate is a useful marker of your fitness progress, as it will drop as you get fitter.
+                        </p> 
+  
+                        <a href="#" class="btn btn-outline-primary btn-sm"> 
+                            Card link 
+                        </a> 
+                        <a href="#" class="btn btn-outline-secondary btn-sm"> 
+                            <i class="far fa-heart"></i></a> 
+                    </div> 
+                </div> 
+            </div> 
+            <div class="col-lg-6 mb-4"> 
+                <div class="card"> 
+                    <img class="card-img-top" src="" alt=""> 
+  
+                    <div class="card-body"> 
+                        <h5 class="card-title">Card title</h5> 
+                        <p class="card-text"> 
+                            Some quick example text to build on the  
+                            card title and make up the bulk of the  
+                            card's content. 
+                        </p> 
+                          
+                        <a href="#" class="btn btn-outline-primary btn-sm"> 
+                            Card link 
+                        </a> 
+                        <a href="#" class="btn btn-outline-secondary btn-sm"> 
+                            <i class="far fa-heart"></i></a> 
+                    </div> 
+                </div> 
+            </div> 
+            <div class="col-lg-6 mb-4"> 
+                <div class="card"> 
+                    <img class="card-img-top" src="" alt=""> 
+  
+                    <div class="card-body"> 
+                        <h5 class="card-title">Card title</h5> 
+                        <p class="card-text"> 
+                            Some quick example text to build on the  
+                            card title and make up the bulk of the  
+                            card's content. 
+                        </p> 
+                          
+                        <a href="#" class="btn btn-outline-primary btn-sm"> 
+                            Card link 
+                        </a> 
+                        <a href="#" class="btn btn-outline-secondary btn-sm"> 
+                            <i class="far fa-heart"></i></a> 
+                    </div> 
+                </div> 
+            </div> 
+        </div> 
+    </div> 
+
+<!-- ==================End cards============================= -->
 
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
+<!-- Js imp -->
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/jquery/jquery.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/venobox/venobox.min.js"></script>
+  <script src="assets/vendor/waypoints/jquery.waypoints.min.js"></script>
+  <script src="assets/vendor/counterup/counterup.min.js"></script>
+  <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+  <script src="assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
 </body>
 
 </html>

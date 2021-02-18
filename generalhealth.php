@@ -1,3 +1,25 @@
+<?php
+session_start();
+include_once 'config.php';
+$pid = $_SESSION["pid"];
+if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true ){
+    header("location: index.php");
+    exit;
+}
+$q = "SELECT * FROM `pinfo` WHERE `pid` = '$pid'";
+$r = mysqli_query($conn, $q);
+// if (mysqli_num_rows($r) > 0) {
+//    // output data of each row
+//    while($row = mysqli_fetch_assoc($r)) {
+//      $pid =  $row["pid"];
+//    }
+//  }
+// $sql = "SELECT * FROM `mreports` WHERE pid='$pid'";
+// $result = mysqli_query($conn, $sql);
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,30 +61,10 @@
 
             <nav class="nav-menu d-none d-lg-block">
                 <ul>
-                    <li class="active"><a href="index.html">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#departments">Departments</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <li class="drop-down"><a href="">Drop Down</a>
-                        <ul>
-                            <li><a href="#">Drop Down 1</a></li>
-                            <li class="drop-down"><a href="#">Deep Drop Down</a>
-                                <ul>
-                                    <li><a href="#">Deep Drop Down 1</a></li>
-                                    <li><a href="#">Deep Drop Down 2</a></li>
-                                    <li><a href="#">Deep Drop Down 3</a></li>
-                                    <li><a href="#">Deep Drop Down 4</a></li>
-                                    <li><a href="#">Deep Drop Down 5</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Drop Down 2</a></li>
-                            <li><a href="#">Drop Down 3</a></li>
-                            <li><a href="#">Drop Down 4</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="index.php">Home</a></li>
+                    
                     <li>
-                        <a data-toggle="modal" data-target="#popUpWindowlogin" style="cursor: pointer;">Log In</a>
+                        <a href="logout.php">Log Out</a>
                     </li>
 
                 </ul>
@@ -140,7 +142,7 @@
 
 
     <!-- ======= Doctor prescription ======= -->
-    <section id="doctors" class="doctors">
+    <!-- <section id="doctors" class="doctors">
         <div class="container">
 
             <div class="section-title">
@@ -155,7 +157,6 @@
 
                 <div class="col-lg-6">
                     <div class="member d-flex align-items-start" style="box-shadow: 0px 2px 15px rgb(0 0 0 / 8%);">
-                        <!-- <div class="pic"><img src="assets/img/doctors/doctors-1.jpg" class="img-fluid" alt=""></div> -->
                         <div class="member-info">
                             <h4>Dr. Ankur</h4>
                             <span>22 Jan 2021</span>
@@ -172,7 +173,6 @@
 
                 <div class="col-lg-6 mt-4 mt-lg-0">
                     <div class="member d-flex align-items-start">
-                        <!-- <div class="pic"><img src="assets/img/doctors/doctors-2.jpg" class="img-fluid" alt=""></div> -->
                         <div class="member-info">
                             <h4>Dr. Sharma</h4>
                             <span>15 May 2020</span>
@@ -192,7 +192,8 @@
             </div>
 
         </div>
-    </section><!-- End Doctor prescription -->
+    </section> -->
+    <!-- End Doctor prescription -->
 
     <!-- ======= General Patient Info ======= -->
     <section id="doctors" class="doctors">
@@ -200,59 +201,61 @@
 
             <div class="section-title">
                 <h2>General Health Info</h2>
-                <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint
-                    consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia
-                    fugiat sit
-                    in iste officiis commodi quidem hic quas.</p>
+                <p></p>
             </div>
-            <form action="">
+            <?php
+while($row = mysqli_fetch_assoc($r)) {
+    
+            echo'<form action="">
 
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label">Name : </label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="colFormLabel" placeholder="Rahul Gandhi" readonly>
+                        <input type="text" class="form-control" id="colFormLabel" value="'.$row["name"].'" readonly>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label">Age : </label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="colFormLabel" placeholder="Rahul Gandhi" readonly>
+                        <input type="text" class="form-control" id="colFormLabel" value="'.$row["age"].'" readonly>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label">Gender : </label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="colFormLabel" placeholder="Rahul Gandhi" readonly>
+                        <input type="text" class="form-control" id="colFormLabel" value="'.$row["gender"].'" readonly>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label">Blood Group : </label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="colFormLabel" placeholder="Rahul Gandhi" readonly>
+                        <input type="text" class="form-control" id="colFormLabel" value="'.$row["bloodgroup"].'" readonly>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label">Weight : </label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="colFormLabel" placeholder="Rahul Gandhi" readonly>
+                        <input type="text" class="form-control" id="colFormLabel" value="'.$row["weight"].'" readonly>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label">Height : </label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="colFormLabel" placeholder="Rahul Gandhi" readonly>
+                        <input type="text" class="form-control" id="colFormLabel" value="'.$row["height"].'" readonly>
                     </div>
                 </div>
                 <div class="row mb-3 form-group">
                     <label class="col-sm-2 col-form-label" for="exampleFormControlTextarea1">Allergic To : </label>
                     <div class="col-sm-10">
                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                            placeholder="Rose and Love" readonly></textarea>
+                            placeholder="lactose" readonly></textarea>
 
                     </div>
                 </div>
         </div>
-        </form>
+        </form>';
+}
+        ?>
         </div>
     </section>
 </body>

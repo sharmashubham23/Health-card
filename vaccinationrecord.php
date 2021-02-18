@@ -5,8 +5,21 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true ){
     exit;
 }
 
+require_once "config.php";
+$pid = $_SESSION["pid"];
+if($_SERVER["REQUEST_METHOD"] == "POST"){
 
+    $vname = $_POST["vname"];
+    $lname = $_POST["lname"];
+    $addnote = $_POST["addnotev"];
+    $pid = $_SESSION["pid"];
 
+    $sql = "INSERT INTO `pvaccineinfo`(`pid`, `vaccinename`, `vaccinefor`) VALUES ('$pid', '$vname', '$addnote')";
+    $result = mysqli_query($conn, $sql);
+}
+
+$sqlvac = "SELECT * FROM `pvaccineinfo` WHERE pid='$pid'";
+$resultvac = mysqli_query($conn, $sqlvac);
 
 
 ?>
@@ -50,31 +63,10 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true ){
 
             <nav class="nav-menu d-none d-lg-block">
                 <ul>
-                    <li class="active"><a href="index.html">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#departments">Departments</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <li class="drop-down"><a href="">Drop Down</a>
-                        <ul>
-                            <li><a href="#">Drop Down 1</a></li>
-                            <li class="drop-down"><a href="#">Deep Drop Down</a>
-                                <ul>
-                                    <li><a href="#">Deep Drop Down 1</a></li>
-                                    <li><a href="#">Deep Drop Down 2</a></li>
-                                    <li><a href="#">Deep Drop Down 3</a></li>
-                                    <li><a href="#">Deep Drop Down 4</a></li>
-                                    <li><a href="#">Deep Drop Down 5</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Drop Down 2</a></li>
-                            <li><a href="#">Drop Down 3</a></li>
-                            <li><a href="#">Drop Down 4</a></li>
-                        </ul>
-                    </li>
+                    <li ><a href="index.php">Home</a></li>
+                    
                     <li>
-                        <a href="logout.php" data-toggle="modal" data-target="#popUpWindowlogin"
-                            style="cursor: pointer;">Log Out</a>
+                        <a href="logout.php">Log Out</a>
                     </li>
 
                 </ul>
@@ -152,47 +144,26 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true ){
 
             <div class="section-title">
                 <h2>Vaccine Taken</h2>
-                <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint
-                    consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia
-                    fugiat sit
-                    in iste officiis commodi quidem hic quas.</p>
+                
             </div>
 
             <div class="row">
+<?php
+            while($row = mysqli_fetch_assoc($resultvac)) {
 
-                <div class="col-lg-6">
-                    <div class="member d-flex align-items-start" style="box-shadow: 0px 2px 15px rgb(0 0 0 / 8%);">
-                        <!-- <div class="pic"><img src="assets/img/doctors/doctors-1.jpg" class="img-fluid" alt=""></div> -->
-                        <div class="member-info">
-                            <h4>Walter White</h4>
-                            <span>Chief Medical Officer</span>
-                            <p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p>
-                            <div class="social">
-                                <a href=""><i class="ri-twitter-fill"></i></a>
-                                <a href=""><i class="ri-facebook-fill"></i></a>
-                                <a href=""><i class="ri-instagram-fill"></i></a>
-                                <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+echo'<div class="col-lg-6 mt-4">
+    <div class="member d-flex align-items-start" style="box-shadow: 0px 2px 15px rgb(0 0 0 / 8%);">
+        <!-- <div class="pic"><img src="assets/img/doctors/doctors-1.jpg" class="img-fluid" alt=""></div> -->
+        <div class="member-info">
+        <a href="http://localhost/HealthCard/upload/'.$row["vaccinename"].'" target="_blank"><h4>'.$row["vaccinename"].'</h4></a>
+            <p>'.$row["vaccinefor"].'</p>    
 
-                <div class="col-lg-6 mt-4 mt-lg-0">
-                    <div class="member d-flex align-items-start">
-                        <!-- <div class="pic"><img src="assets/img/doctors/doctors-2.jpg" class="img-fluid" alt=""></div> -->
-                        <div class="member-info">
-                            <h4>Sarah Jhonson</h4>
-                            <span>Anesthesiologist</span>
-                            <p>Aut maiores voluptates amet et quis praesentium qui senda para</p>
-                            <div class="social">
-                                <a href=""><i class="ri-twitter-fill"></i></a>
-                                <a href=""><i class="ri-facebook-fill"></i></a>
-                                <a href=""><i class="ri-instagram-fill"></i></a>
-                                <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            
+        </div>
+    </div>
+</div>';
+}
+?>
 
 
 
@@ -201,7 +172,7 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true ){
         </div>
     </section><!-- End Doctors Section -->
     <!-- ======= Doctors Section ======= -->
-    <section id="doctors" class="doctors">
+    <!-- <section id="doctors" class="doctors">
         <div class="container">
 
             <div class="section-title">
@@ -216,7 +187,6 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true ){
 
                 <div class="col-lg-6">
                     <div class="member d-flex align-items-start" style="box-shadow: 0px 2px 15px rgb(0 0 0 / 8%);">
-                        <!-- <div class="pic"><img src="assets/img/doctors/doctors-1.jpg" class="img-fluid" alt=""></div> -->
                         <div class="member-info">
                             <h4>Walter White</h4>
                             <span>Chief Medical Officer</span>
@@ -233,7 +203,6 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true ){
 
                 <div class="col-lg-6 mt-4 mt-lg-0">
                     <div class="member d-flex align-items-start">
-                        <!-- <div class="pic"><img src="assets/img/doctors/doctors-2.jpg" class="img-fluid" alt=""></div> -->
                         <div class="member-info">
                             <h4>Sarah Jhonson</h4>
                             <span>Anesthesiologist</span>
@@ -253,7 +222,8 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true ){
             </div>
 
         </div>
-    </section><!-- End Doctors Section -->
+    </section> -->
+    <!-- End Doctors Section -->
 
     <!-- Add New Vaccine Data -->
     <div class="container">
@@ -273,30 +243,30 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true ){
 
                         </div>
 
-                        <form action="forms/appointment.php" method="post" role="form" class="php-email-form">
+                        <form action="" method="post">
 
                             <div class="form-group">
                                 <label for="Vaccinename">Vaccine Name</label>
-                                <input type="text" class="form-control" id="text" placeholder="Pathology Report">
+                                <input type="text" class="form-control" name="vname" id="text" placeholder="Covid-19 vaccine">
                                 <small id="emailHelp" class="form-text text-muted">Enter Report name such as Consulation
                                     Report, Discharge Report, Pathology Report, etc.</small>
                             </div>
                             <div class="form-group">
-                                <label for="reportname">Lab Name</label>
-                                <input type="text" class="form-control" id="text" aria-describedby="emailHelp"
-                                    data-rule="email" data-msg="Please enter a valid email" placeholder="sms lab">
+                                <label for="Lab Name">Lab Name</label>
+                                <input type="text" class="form-control" name="lname" id="text" aria-describedby="emailHelp"
+                                    data-rule="email" data-msg="Please enter a valid email" placeholder="Ajmer Lab">
 
                             </div>
                             <div class="form-group">
-                                <label for="exampleFormControlTextarea1">Additional Note</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                <label for="Additional Note">Additional Note</label>
+                                <textarea class="form-control" name="addnotev" id="addnotev" rows="3"></textarea>
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="exampleFormControlFile1">Add Vaccine PDF</label>
                                 <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                            </div>
+                            </div> -->
                             <center>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
                             </center>
                         </form>
                         <!-- <div class="section-title">
