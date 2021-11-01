@@ -1,11 +1,7 @@
 <?php
 session_start();
 
-// if($_SESSION['loggedin'] == true){
-//   header("location: dashboard.php");
 
-// }
-// Include config file
 require_once "config.php";
 
 $showAlert = false;
@@ -85,21 +81,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: Medilab - v2.1.1
-  * Template URL: https://bootstrapmade.com/medilab-free-medical-bootstrap-theme/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
-  <!-- Extra start-->
-  <!-- <script data-require="jquery@3.0.0" data-semver="3.0.0"
-    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.js"></script>
-  <link data-require="bootstrap@3.3.7" data-semver="3.3.7" rel="stylesheet"
-    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-  <script data-require="bootstrap@3.3.7" data-semver="3.3.7"
-    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="style.css" /> -->
-  <!-- Extra ends -->
+  
 </head>
 
 <body>
@@ -110,7 +92,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       <div class="contact-info mr-auto">
         <i class="icofont-envelope"></i> <a href="mailto:contact@example.com">contact@example.com</a>
         <i class="icofont-phone"></i> +1 5589 55488 55
-        <i class="icofont-google-map"></i> A108 Adam Street, NY
+        <i class="icofont-google-map"></i> Engineering College Ajmer, IN
       </div>
       <div class="social-links">
         <a href="#" class="twitter"><i class="icofont-twitter"></i></a>
@@ -127,8 +109,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <div class="container d-flex align-items-center">
 
       <h1 class="logo mr-auto"><a href="index.html">MY HEALTH CARD</a></h1>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+     
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
@@ -430,7 +411,7 @@ DATA</h2>
             </form>
             <div class="section-title">
               <p>New User create account</p>
-              <a data-dismiss="modal" data-toggle="modal" data-target="#popUpWindow" style="cursor: pointer; color: blue;">Register First</a>
+              <a data-dismiss="modal" data-toggle="modal" data-target="#popUpWindow" style="cursor: pointer; color: blue;">Register </a>
         
             </div>
           </div>

@@ -233,25 +233,18 @@ while($row = mysqli_fetch_assoc($r)) {
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label">Weight : </label>
+                    <label class="col-sm-2 col-form-label">Weight(Kilograms) : </label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="colFormLabel" value="'.$row["weight"].'" readonly>
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label">Height : </label>
+                    <label class="col-sm-2 col-form-label">Height(Centimeters) : </label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="colFormLabel" value="'.$row["height"].'" readonly>
                     </div>
                 </div>
-                <div class="row mb-3 form-group">
-                    <label class="col-sm-2 col-form-label" for="exampleFormControlTextarea1">Allergic To : </label>
-                    <div class="col-sm-10">
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                            placeholder="lactose" readonly></textarea>
-
-                    </div>
-                </div>
+                
         </div>
         </form>';
 }

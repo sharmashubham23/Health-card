@@ -2,6 +2,7 @@
 session_start();
 include_once 'config.php';
 $pid = $_SESSION["pid"];
+
 $id = $_SESSION["id"];
 if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true ){
     header("location: index.php");
@@ -13,6 +14,7 @@ if (mysqli_num_rows($r) > 0) {
    // output data of each row
    while($row = mysqli_fetch_assoc($r)) {
      $pid =  $row["pid"];
+     
    }
  }
 $sql = "SELECT * FROM `mreports` WHERE pid='$pid'";
@@ -148,34 +150,9 @@ $result = mysqli_query($conn, $sql);
             <?php
                 
 while($row = mysqli_fetch_assoc($result)) {
-    // Store a string into the variable which 
 
 
-// Store the cipher method 
-$ciphering = "AES-128-CTR"; 
-
-// Use OpenSSl Encryption method 
-$iv_length = openssl_cipher_iv_length($ciphering); 
-$options = 0; 
-
-// Non-NULL Initialization Vector for encryption 
-$encryption_iv = '1234567891011121'; 
-
-// Store the encryption key 
-$encryption_key = "sjdknskdjfnkjsfklskpdfk"; 
-
-$base = "upload/";
-$original_string = $base.$row["reportpdf"];
-// Use openssl_encrypt() function to encrypt the data 
-$encryption = openssl_encrypt($original_string, $ciphering, 
-			$encryption_key, $options, $encryption_iv); 
-
- 
-
-
-
-
-      $surl = $encryption;
+      $surl = $row["reportpdf"];
       
                 echo'<div class="col-lg-6 mt-4">
                     <div class="member d-flex align-items-start" style="box-shadow: 0px 2px 15px rgb(0 0 0 / 8%);">
@@ -188,7 +165,7 @@ $encryption = openssl_encrypt($original_string, $ciphering,
 
 
                             <div class="button mt-4">
-                                <a target="_blank" href="http://localhost/HealthCard/fileview.php?u='.$surl.'"><button type="button" class="btn btn-outline-primary">View</button></a>
+                                <a target="_blank" href="http://localhost/HealthCard/upload/'.$surl.'"><button type="button" class="btn btn-outline-primary">View</button></a>
                                 
                             </div>
                         </div>
